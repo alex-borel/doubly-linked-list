@@ -52,15 +52,19 @@ class LinkedList {
     }
 
     insertAt(index, data) {
+        var node = new Node(data);
         var count = 0;
         var currentNode = this._head;
         while (currentNode) {
             if (count === index) {
-                currentNode.data = data;
+              node.next = currentNode;
+              node.prev = currentNode.prev;
+              currentNode.prev.next = node;
             }
             currentNode = currentNode.next;
             count++;
         }
+        this.length++;
         return this;
     }
 
